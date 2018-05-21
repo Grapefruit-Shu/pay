@@ -24,9 +24,9 @@ import org.jdom.input.SAXBuilder;
 
 
 /**
- * 
- * @author tz
- *
+ * @Author:shuyong
+ * @Description:
+ * @Date: Create in 10:25 2018/5/17
  */
 public class HttpXmlUtils {
 
@@ -75,7 +75,7 @@ public class HttpXmlUtils {
 	/**
 	 * 构造参数
 	 * 
-	 * @param xml
+	 * @param map
 	 * @return
 	 */
 	public static String xmlInfo(Map map) {
@@ -94,8 +94,6 @@ public class HttpXmlUtils {
             }
         }
         sb.append("</xml>");
-        System.out.println("Map参数准备二次xml拼接后的结果"+sb);
-
 		return sb.toString();
 	}
 
@@ -108,7 +106,7 @@ public class HttpXmlUtils {
 	 * @param xmlParam    请求xml参数
 	 * @return
 	 */
-	public static String httpsRequest(String requestUrl, String xmlParam) {
+	public static String httpsRequest(String requestUrl, String requestMethod, String xmlParam) {
 		
 		 try {  
              
@@ -119,7 +117,7 @@ public class HttpXmlUtils {
              conn.setDoInput(true);  
              conn.setUseCaches(false);  
              // 设置请求方式（GET/POST）  
-             conn.setRequestMethod("POST");  
+             conn.setRequestMethod(requestMethod);
              conn.setRequestProperty("content-type", "application/x-www-form-urlencoded");  
              // 当outputStr不为null时向输出流写数据  
              if (null != xmlParam) {  
@@ -212,11 +210,10 @@ public class HttpXmlUtils {
 			} else {
 				v = getChildrenText(children);
 			}
-			
 			m.put(k, v);
 		}
 		
-		//关闭�?
+		//关闭流
 		in.close();
 		
 		return m;

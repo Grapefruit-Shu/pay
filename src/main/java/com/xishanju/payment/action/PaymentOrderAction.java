@@ -6,6 +6,7 @@ import com.xishanju.payment.common.RetCode;
 import com.xishanju.payment.domain.dto.RequestDto;
 import com.xishanju.payment.domain.enums.ChannelEnums;
 import com.xishanju.payment.domain.service.AliPayTradeService;
+import com.xishanju.payment.domain.service.WeChatTradeService;
 import com.xishanju.payment.dto.OrderDetailDto;
 import com.xishanju.payment.vo.OrderVo;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,9 @@ public class PaymentOrderAction {
     @Resource
     private AliPayTradeService aliPayTradeService;
 
+    @Resource
+    private WeChatTradeService weChatTradeService;
+
     @RequestMapping("/tradePay.do")
     public ResultSet<OrderVo> tradePay(@RequestParam("order_no") String order_no, @RequestParam("amount") String amount, @RequestParam("app") String app,
                               @RequestParam("channel") String channel, @RequestParam("currency") String currency, @RequestParam("client_ip") String client_ip,
@@ -43,7 +47,8 @@ public class PaymentOrderAction {
             OrderVo orderVo = aliPayTradeService.sendAliPayTradeService(requestDto);
             resultSet.setData(orderVo);
         } if (ChannelEnums.WEIXIN.getType().equalsIgnoreCase(requestDto.getChannel())) {
-
+            OrderVo orderVo = weChatTradeService.wechatPrePay(requestDto);
+            resultSet.setData(orderVo);
         }
         resultSet.setCode(RetCode.SUCCESS);
         return resultSet;
