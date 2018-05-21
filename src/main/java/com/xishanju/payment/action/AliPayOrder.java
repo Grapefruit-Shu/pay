@@ -155,15 +155,14 @@ public class AliPayOrder {
 
                     // //////// 执行自己的业务逻辑////////////////
 
-                    System.out.println("支付成功。。。。");
+                    logger.info("支付成功。。。。");
                     // 通知微信.异步确认成功.必写.不然会一直通知后台.八次之后就认为交易失败了.
                     resXml = "<xml>"
                             + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
 
                 } else {
-                    System.out
-                            .println("支付失败,错误信息：" + packageParams.get("err_code"));
+                    logger.info("支付失败,错误信息：" + packageParams.get("err_code"));
 
                     resXml = "<xml>"
                             + "<return_code><![CDATA[FAIL]]></return_code>"
@@ -182,7 +181,7 @@ public class AliPayOrder {
                 out.flush();
                 out.close();
             } else {
-                System.out.println("验签错误");
+                logger.error("验签错误");
             }
         } catch (Exception e) {
             e.printStackTrace();
