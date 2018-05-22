@@ -61,6 +61,7 @@ public class AliPayOrder {
                     msg = "未付款交易超时关闭，或支付完成后全额退款";
                     trade_status = "PAYCLOSED";
                 } else if ("TRADE_SUCCESS".equals(trade_status)) {
+
                     msg = "交易支付成功";
                     trade_status = "SUCCESS";
                 } else if ("TRADE_FINISHED".equals(trade_status)) {

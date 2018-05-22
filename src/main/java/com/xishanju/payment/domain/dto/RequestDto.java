@@ -28,6 +28,16 @@ public class RequestDto {
 
     private String body;
 
+    private String timeOutExpress;
+
+    public String getTimeOutExpress() {
+        return timeOutExpress;
+    }
+
+    public void setTimeOutExpress(String timeOutExpress) {
+        this.timeOutExpress = timeOutExpress;
+    }
+
     public String getOrder_no() {
         return order_no;
     }

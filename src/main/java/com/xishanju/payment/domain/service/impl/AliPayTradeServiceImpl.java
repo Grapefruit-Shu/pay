@@ -15,8 +15,8 @@ import com.xishanju.payment.vo.OrderVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author shuyong
@@ -35,19 +35,17 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
 
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         AlipayTradePayModel model = new AlipayTradePayModel();
-        model.setOutTradeNo(System.currentTimeMillis() + "");
+        model.setOutTradeNo(requestDto.getOrder_no());
         model.setSubject(requestDto.getSubject());
         model.setTotalAmount(requestDto.getAmount());
+        model.setTimeoutExpress(requestDto.getTimeOutExpress());
+        model.setProductCode("QUICK_MSECURITY_PAY");
+        model.setBody(requestDto.getBody());
 
         request.setBizModel(model);
         request.setNotifyUrl("");
         request.setApiVersion("1.0");
-        Map<String, String> biz_content = new HashMap<String, String>();
-        biz_content.put("subject", requestDto.getSubject());
-        biz_content.put("total_amount", (Float.parseFloat(requestDto.getAmount()) / 100) + "");
-        biz_content.put("product_code", "QUICK_MSECURITY_PAY");
-        biz_content.put("timeout_express", System.currentTimeMillis() + "");
-        request.setBizContent(JSON.toJSONString(biz_content));
+
         request.setNotifyUrl("http://*****/payment/aliPayOrder.do");
         AlipayTradeAppPayResponse response = sendAliOrderApi.queryOrder(request);
 
@@ -68,5 +66,16 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
         orderVo.setCredential(credentialVo);
 
         return orderVo;
+    }
+
+    private static String getOutTradeNo() {
+        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
+        Date date = new Date();
+        String key = format.format(date);
+
+        Random r = new Random();
+        key = key + r.nextInt();
+        key = key.substring(0, 15);
+        return key;
     }
 }

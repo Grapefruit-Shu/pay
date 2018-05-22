@@ -10,6 +10,7 @@ import com.xishanju.payment.domain.service.WeChatTradeService;
 import com.xishanju.payment.dto.OrderDetailDto;
 import com.xishanju.payment.vo.OrderVo;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class PaymentOrderAction {
     @Resource
     private WeChatTradeService weChatTradeService;
 
-    @RequestMapping("/tradePay.do")
+    @RequestMapping(value = "/tradePay.do" , method = RequestMethod.POST)
     public ResultSet<OrderVo> tradePay(@RequestParam("order_no") String order_no, @RequestParam("amount") String amount, @RequestParam("app") String app,
                               @RequestParam("channel") String channel, @RequestParam("currency") String currency, @RequestParam("client_ip") String client_ip,
                               @RequestParam("subject") String subject, @RequestParam("body") String body) {
@@ -43,6 +44,7 @@ public class PaymentOrderAction {
         requestDto.setChannel(channel);
         requestDto.setClient_ip(client_ip);
         requestDto.setCurrency(currency);
+        requestDto.setTimeOutExpress("30m");
         if (ChannelEnums.ALI.getType().equalsIgnoreCase(requestDto.getChannel())) {
             OrderVo orderVo = aliPayTradeService.sendAliPayTradeService(requestDto);
             resultSet.setData(orderVo);
@@ -54,7 +56,7 @@ public class PaymentOrderAction {
         return resultSet;
     }
 
-    @RequestMapping("/getOrderDetail.do")
+    @RequestMapping(value = "/getOrderDetail.do" , method = RequestMethod.POST)
     public Result getOrderDetail() {
         OrderDetailDto detail = new OrderDetailDto();
         detail.setOrder_no(145654654);
