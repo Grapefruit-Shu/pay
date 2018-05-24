@@ -15,6 +15,7 @@ import com.xishanju.payment.vo.OrderVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -30,6 +31,8 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
 
     @Override
     public OrderVo sendAliPayTradeService(RequestDto requestDto) {
+
+        BigDecimal yuanToFen = new BigDecimal(100);
 
         OrderVo orderVo = new OrderVo();
 
@@ -50,8 +53,11 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
         AlipayTradeAppPayResponse response = sendAliOrderApi.queryOrder(request);
 
         orderVo.setAmount(requestDto.getAmount());
+        orderVo.setAmount_settle(new BigDecimal(requestDto.getAmount()).multiply(yuanToFen).toString());
         orderVo.setApp(requestDto.getApp());
         orderVo.setBody(requestDto.getBody());
+        orderVo.setPaid(true);
+        orderVo.setLivemode(true);
         orderVo.setChannel(requestDto.getChannel());
         orderVo.setClient_ip(requestDto.getClient_ip());
         orderVo.setCurrency(requestDto.getCurrency());
@@ -66,16 +72,5 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
         orderVo.setCredential(credentialVo);
 
         return orderVo;
-    }
-
-    private static String getOutTradeNo() {
-        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
-        Date date = new Date();
-        String key = format.format(date);
-
-        Random r = new Random();
-        key = key + r.nextInt();
-        key = key.substring(0, 15);
-        return key;
     }
 }

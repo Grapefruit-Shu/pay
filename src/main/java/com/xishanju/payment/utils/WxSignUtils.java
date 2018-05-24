@@ -40,8 +40,6 @@ public class WxSignUtils {
             }
         }
         sb.append("key="+wxKey);
-        //sb.append("key=" + Key);
-        System.out.println("字符串拼接后是："+sb);
         String sign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
         return sign;
     }

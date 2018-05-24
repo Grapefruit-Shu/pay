@@ -1,6 +1,9 @@
 package com.xishanju.payment.remoting.wechat.service;
 
+import com.xishanju.payment.remoting.wechat.util.MyConfig;
+
 import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * @Author:shuyong
@@ -9,5 +12,5 @@ import java.util.Map;
  */
 public interface WeChatPrePayApi {
 
-    Map<String,String> getWeChatPrePay(String requestXML);
+    Map<String,String> getWeChatPrePay(SortedMap<String, String> parameters, MyConfig config);
 }

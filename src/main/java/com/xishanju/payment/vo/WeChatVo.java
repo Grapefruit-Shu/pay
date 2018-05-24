@@ -3,8 +3,8 @@ package com.xishanju.payment.vo;
 /**
  * @Author:shuyong
  * @Description:
- * @Date: Create in 10:47 2018/5/18
+ * @Date: Create in 10:40 2018/5/24
  */
-public class AlipayVo extends DataVo{
+public class WeChatVo extends DataVo{
 
 }

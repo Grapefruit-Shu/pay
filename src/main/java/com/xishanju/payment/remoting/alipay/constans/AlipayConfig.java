@@ -9,7 +9,7 @@ import com.xishanju.payment.core.LoadProperties;
 public class AlipayConfig {
 
     //合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://openhome.alipay.com/platform/keyManage.htm?keyType=partner
-    public static String partner = "2088102175701127";
+    public static String partner = LoadProperties.getProperties("alipay_partner");
 
     //商户的私钥,需要PKCS8格式，RSA公私钥生成：https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.nBDxfy&treeId=58&articleId=103242&docType=1
     public static String alipay_private_key = LoadProperties.getProperties("alipay_private_key");
@@ -26,10 +26,6 @@ public class AlipayConfig {
     // 字符编码格式 目前支持 gbk 或 utf-8
     public static String charset = "utf-8";
 
-    // 接收通知的接口名
-    public static String service = "http://60.***.***.00/callbacks.do";
-    //public static String service = "mobile.securitypay.pay";
-
     //阿里支付url
     public static String alipay_serverUrl = LoadProperties.getProperties("alipay_serverUrl");
 
@@ -37,11 +33,10 @@ public class AlipayConfig {
     public static String format = "json";
 
     //APPID
-    public static String app_id="2016091500514964";
+    public static String app_id = LoadProperties.getProperties("alipay_app_id");
 
-    public static String ALIPAY_TRADE_SUCCESS = "true";
-
-    public static String notify_url = "http://";
+    // 接收通知的接口名
+    public static String notify_url = LoadProperties.getProperties("alipay_notify_url");
 
     public void reload() {
 

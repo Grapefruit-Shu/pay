@@ -11,6 +11,8 @@ public class CredentialVo {
 
     private AlipayVo alipay;
 
+    private WeChatVo wechat;
+
     public String getObject() {
         return object;
     }
@@ -25,5 +27,13 @@ public class CredentialVo {
 
     public void setAlipay(AlipayVo alipay) {
         this.alipay = alipay;
+    }
+
+    public WeChatVo getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(WeChatVo wechat) {
+        this.wechat = wechat;
     }
 }

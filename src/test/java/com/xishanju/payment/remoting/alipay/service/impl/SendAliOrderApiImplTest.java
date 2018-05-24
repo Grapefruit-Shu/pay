@@ -46,4 +46,8 @@ public class SendAliOrderApiImplTest {
         }
     }
 
+    public void queryWXOrder() {
+
+    }
+
 }
