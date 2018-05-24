@@ -78,7 +78,7 @@ public class WeChatTradeServiceImpl implements WeChatTradeService {
                 weChatVo.setOrderInfo(JSON.toJSONString(againParameters));
             } else {
                 String return_msg = resultMap.get("return_msg");
-                logger.error(return_msg);
+                logger.error("微信支付:" + return_msg);
             }
         } catch (Exception e) {
             logger.error("微信支付异常：",e);
