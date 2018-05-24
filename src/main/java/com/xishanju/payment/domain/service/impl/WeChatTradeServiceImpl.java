@@ -43,7 +43,7 @@ public class WeChatTradeServiceImpl implements WeChatTradeService {
         parameters.put("out_trade_no", OurTradeNo.orderNo());
         parameters.put("total_fee", requestDto.getAmount());
         parameters.put("notify_url", WeChatCons.notify_url);
-        parameters.put("trade_type", "APP");
+        parameters.put("trade_type", requestDto.getTrade_type());
         parameters.put("spbill_create_ip", requestDto.getClient_ip());
 
         orderVo.setAmount(requestDto.getAmount());
@@ -59,7 +59,6 @@ public class WeChatTradeServiceImpl implements WeChatTradeService {
         orderVo.setOrder_no(parameters.get("out_trade_no").toString());
 
         CredentialVo credentialVo = new CredentialVo();
-        credentialVo.setObject("credential");
         WeChatVo weChatVo = new WeChatVo();
         credentialVo.setWechat(weChatVo);
         orderVo.setCredential(credentialVo);

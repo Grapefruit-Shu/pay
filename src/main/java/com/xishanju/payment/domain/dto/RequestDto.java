@@ -30,6 +30,16 @@ public class RequestDto {
 
     private String timeOutExpress;
 
+    private String trade_type;
+
+    public String getTrade_type() {
+        return trade_type;
+    }
+
+    public void setTrade_type(String trade_type) {
+        this.trade_type = trade_type;
+    }
+
     public String getTimeOutExpress() {
         return timeOutExpress;
     }

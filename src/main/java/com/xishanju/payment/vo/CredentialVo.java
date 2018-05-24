@@ -1,5 +1,7 @@
 package com.xishanju.payment.vo;
 
+import com.xishanju.payment.utils.StringUtil;
+
 /**
  * @Author:shuyong
  * @Description:
@@ -14,6 +16,9 @@ public class CredentialVo {
     private WeChatVo wechat;
 
     public String getObject() {
+        if (StringUtil.isEmpty(object)) {
+            return "credential";
+        }
         return object;
     }
 

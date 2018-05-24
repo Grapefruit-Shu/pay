@@ -35,6 +35,8 @@ public class AlipayConfig {
     //APPID
     public static String app_id = LoadProperties.getProperties("alipay_app_id");
 
+    public static String product_code = LoadProperties.getProperties("alipay_product_code");
+
     // 接收通知的接口名
     public static String notify_url = LoadProperties.getProperties("alipay_notify_url");
 

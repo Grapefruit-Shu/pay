@@ -33,7 +33,7 @@ public class PaymentOrderAction {
     @RequestMapping(value = "/tradePay.do" , method = RequestMethod.POST)
     public ResultSet<OrderVo> tradePay(@RequestParam("order_no") String order_no, @RequestParam("amount") String amount, @RequestParam("app") String app,
                               @RequestParam("channel") String channel, @RequestParam("currency") String currency, @RequestParam("client_ip") String client_ip,
-                              @RequestParam("subject") String subject, @RequestParam("body") String body) {
+                              @RequestParam("subject") String subject, @RequestParam("body") String body, @RequestParam("trade_type") String trade_type) {
         RequestDto requestDto = new RequestDto();
         ResultSet<OrderVo> resultSet = new ResultSet<OrderVo>();
         requestDto.setSubject(subject);
@@ -41,6 +41,7 @@ public class PaymentOrderAction {
         requestDto.setAmount(amount);
         requestDto.setApp(app);
         requestDto.setBody(body);
+        requestDto.setTrade_type(trade_type);
         requestDto.setChannel(channel);
         requestDto.setClient_ip(client_ip);
         requestDto.setCurrency(currency);

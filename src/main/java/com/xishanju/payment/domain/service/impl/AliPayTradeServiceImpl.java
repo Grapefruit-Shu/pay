@@ -1,6 +1,7 @@
 package com.xishanju.payment.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.alipay.api.internal.util.StringUtils;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
@@ -8,6 +9,7 @@ import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.xishanju.payment.domain.dto.RequestDto;
 import com.xishanju.payment.domain.enums.ChannelEnums;
 import com.xishanju.payment.domain.service.AliPayTradeService;
+import com.xishanju.payment.remoting.alipay.constans.AlipayConfig;
 import com.xishanju.payment.remoting.alipay.service.SendAliOrderApi;
 import com.xishanju.payment.vo.AlipayVo;
 import com.xishanju.payment.vo.CredentialVo;
@@ -42,14 +44,13 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
         model.setSubject(requestDto.getSubject());
         model.setTotalAmount(requestDto.getAmount());
         model.setTimeoutExpress(requestDto.getTimeOutExpress());
-        model.setProductCode("QUICK_MSECURITY_PAY");
+        model.setProductCode(AlipayConfig.product_code);
         model.setBody(requestDto.getBody());
 
         request.setBizModel(model);
-        request.setNotifyUrl("");
         request.setApiVersion("1.0");
 
-        request.setNotifyUrl("http://*****/payment/aliPayOrder.do");
+        request.setNotifyUrl(AlipayConfig.notify_url);
         AlipayTradeAppPayResponse response = sendAliOrderApi.queryOrder(request);
 
         orderVo.setAmount(requestDto.getAmount());
@@ -65,7 +66,6 @@ public class AliPayTradeServiceImpl implements AliPayTradeService {
         orderVo.setOrder_no(requestDto.getOrder_no());
 
         CredentialVo credentialVo = new CredentialVo();
-        credentialVo.setObject("credential");
         AlipayVo alipayVo = new AlipayVo();
         alipayVo.setOrderInfo(response.getBody());
         credentialVo.setAlipay(alipayVo);
