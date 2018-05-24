@@ -1,5 +1,7 @@
 package com.xishanju.payment.remoting.wechat.util;
 
+import com.xishanju.payment.core.LoadProperties;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,15 +26,15 @@ public class MyConfig implements WXPayConfig {
     }
 
     public String getAppID() {
-        return "wxab8acb865bb1637e";
+        return LoadProperties.getProperties("wechat_app_id");
     }
 
     public String getMchID() {
-        return "11473623";
+        return LoadProperties.getProperties("wechat_mch_id");
     }
 
     public String getKey() {
-        return "2ab9071b06b9f739b950ddb41db2690d";
+        return LoadProperties.getProperties("wechat_key");
     }
 
     public InputStream getCertStream() {
